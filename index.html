@@ -12,14 +12,29 @@
       font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
     }
 
-    html {
-      scroll-behavior: smooth;
+    /* FIX: Không ép chiều cao, không tạo khoảng trắng */
+    html, body {
+      width: 100%;
+      height: auto;
+      min-height: 0;
+      margin: 0;
+      padding: 0;
     }
 
-    /* Body: khi chưa mở thư thì căn giữa màn hình, khi mở thì scroll bình thường */
+    html {
+      scroll-behavior: smooth;
+      background: #1a0e1e;
+    }
+
+    /* Khi chưa mở thư: khóa scroll để phong bì luôn ở giữa, không có khoảng trắng thừa */
+    html.locked,
+    body.locked {
+      overflow: hidden;
+      height: 100%;
+    }
+
     body {
       background: linear-gradient(145deg, #1a0e1e 0%, #2c1a2e 100%);
-      min-height: 100vh;
       position: relative;
       overflow-x: hidden;
       -webkit-overflow-scrolling: touch;
@@ -60,24 +75,27 @@
     }
 
     /* ---------- KHU VỰC LÁ THƯ ---------- */
-    /* Trạng thái ĐÓNG: wrapper chiếm toàn màn hình, căn giữa phong bì */
     .letter-wrapper {
       position: relative;
       z-index: 20;
       width: 100%;
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
       padding: 20px 16px;
       perspective: 1200px;
     }
 
-    /* Trạng thái MỞ: wrapper không còn ép chiều cao, chỉ hiển thị nội dung */
+    /* Trạng thái ĐÓNG: chiếm đúng 100vh, căn giữa phong bì */
+    .letter-wrapper.closed {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Trạng thái MỞ: chỉ chiếm đúng nội dung, không giãn */
     .letter-wrapper.open {
       display: block;
-      min-height: auto;
-      padding: 24px 16px 40px;
+      min-height: 0;
+      padding: 20px 16px 32px;
     }
 
     /* Phong bì hồng */
@@ -294,12 +312,8 @@
 
     /* Mobile */
     @media (max-width: 540px) {
-      .letter-wrapper {
-        padding: 16px 12px;
-      }
-      .letter-wrapper.open {
-        padding: 16px 12px 32px;
-      }
+      .letter-wrapper { padding: 16px 12px; }
+      .letter-wrapper.open { padding: 16px 12px 28px; }
       .envelope h1 { font-size: 1.9rem; }
       .envelope .heart-icon { font-size: 3.8rem; }
       .letter-content { padding: 22px 16px; border-radius: 22px; }
@@ -310,21 +324,21 @@
     }
   </style>
 </head>
-<body>
+<body class="locked">
 
   <!-- TRÁI TIM RƠI BACKGROUND -->
   <div class="hearts-bg" id="heartsBg"></div>
 
   <!-- LÁ THƯ + NỘI DUNG -->
-  <div class="letter-wrapper" id="letterWrapper">
-    <!-- PHONG BÌ HỒNG (CLICK ĐỂ MỞ) -->
+  <div class="letter-wrapper closed" id="letterWrapper">
+    <!-- PHONG BÌ HỒNG -->
     <div class="envelope" id="envelope">
       <div class="heart-icon">💌</div>
       <h1>Gửi em</h1>
       <p>❤️ Nhấn để mở thư ❤️</p>
     </div>
 
-    <!-- BỨC THƯ ĐÃ MỞ -->
+    <!-- BỨC THƯ -->
     <div class="letter-content" id="letterContent">
       <div class="letter-inner">
         <div class="letter-text">
@@ -333,7 +347,6 @@
           mong em luôn vui và ấm áp. 🌸”
         </div>
 
-        <!-- 1 ẢNH DUY NHẤT -->
         <div class="photo-single">
           <div class="photo-card">
             <img 
@@ -388,13 +401,21 @@
       const closeBtn = document.getElementById('closeBtn');
 
       function openLetter() {
+        // Bỏ khóa scroll
+        document.documentElement.classList.remove('locked');
+        document.body.classList.remove('locked');
+        // Chuyển wrapper sang trạng thái mở
+        wrapper.classList.remove('closed');
         wrapper.classList.add('open');
-        // Khi mở, kéo lên đầu thư
         window.scrollTo({ top: 0, behavior: 'auto' });
       }
 
       function closeLetter() {
+        // Khóa scroll lại để phong bì căn giữa
+        document.documentElement.classList.add('locked');
+        document.body.classList.add('locked');
         wrapper.classList.remove('open');
+        wrapper.classList.add('closed');
         window.scrollTo({ top: 0, behavior: 'auto' });
       }
 
