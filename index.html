@@ -12,7 +12,6 @@
       font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
     }
 
-    /* FIX: Không ép chiều cao, không tạo khoảng trắng */
     html, body {
       width: 100%;
       height: auto;
@@ -26,7 +25,6 @@
       background: #1a0e1e;
     }
 
-    /* Khi chưa mở thư: khóa scroll để phong bì luôn ở giữa, không có khoảng trắng thừa */
     html.locked,
     body.locked {
       overflow: hidden;
@@ -40,7 +38,6 @@
       -webkit-overflow-scrolling: touch;
     }
 
-    /* ---------- TRÁI TIM RƠI (BACKGROUND) ---------- */
     .hearts-bg {
       position: fixed;
       top: 0;
@@ -74,7 +71,6 @@
       }
     }
 
-    /* ---------- KHU VỰC LÁ THƯ ---------- */
     .letter-wrapper {
       position: relative;
       z-index: 20;
@@ -83,7 +79,6 @@
       perspective: 1200px;
     }
 
-    /* Trạng thái ĐÓNG: chiếm đúng 100vh, căn giữa phong bì */
     .letter-wrapper.closed {
       min-height: 100vh;
       display: flex;
@@ -91,14 +86,12 @@
       justify-content: center;
     }
 
-    /* Trạng thái MỞ: chỉ chiếm đúng nội dung, không giãn */
     .letter-wrapper.open {
       display: block;
       min-height: 0;
       padding: 20px 16px 32px;
     }
 
-    /* Phong bì hồng */
     .envelope {
       background: linear-gradient(135deg, #ffb6c1 0%, #ff8da1 100%);
       border-radius: 24px 24px 18px 18px;
@@ -159,12 +152,10 @@
       border: 1px solid #ffeef2;
     }
 
-    /* Ẩn phong bì khi mở */
     .letter-wrapper.open .envelope {
       display: none;
     }
 
-    /* ---------- BỨC THƯ ---------- */
     .letter-content {
       display: none;
       width: 100%;
@@ -233,7 +224,6 @@
       font-style: normal;
     }
 
-    /* 1 ẢNH DUY NHẤT, TO */
     .photo-single {
       display: flex;
       justify-content: center;
@@ -277,7 +267,6 @@
       letter-spacing: 0.5px;
     }
 
-    /* Nút đóng */
     .close-btn {
       align-self: center;
       background: #ffb6c1;
@@ -310,7 +299,6 @@
       box-shadow: 0 2px 0 #b34b62, 0 8px 18px rgba(180, 50, 80, 0.4);
     }
 
-    /* Mobile */
     @media (max-width: 540px) {
       .letter-wrapper { padding: 16px 12px; }
       .letter-wrapper.open { padding: 16px 12px 28px; }
@@ -326,24 +314,20 @@
 </head>
 <body class="locked">
 
-  <!-- TRÁI TIM RƠI BACKGROUND -->
   <div class="hearts-bg" id="heartsBg"></div>
 
-  <!-- LÁ THƯ + NỘI DUNG -->
   <div class="letter-wrapper closed" id="letterWrapper">
-    <!-- PHONG BÌ HỒNG -->
     <div class="envelope" id="envelope">
       <div class="heart-icon">💌</div>
       <h1>Gửi em</h1>
       <p>❤️ Đặt cái ngón tay bé xíu của em vào đây nhanh lên 😤 ❤️</p>
     </div>
 
-    <!-- BỨC THƯ -->
     <div class="letter-content" id="letterContent">
       <div class="letter-inner">
         <div class="letter-text">
-          <i>“Có những điều muốn nói…</i><br>
-          Gửi em chút yêu thương nhỏ bé,<br>
+          <i>“Em bé ơi chúc mừng 20/10</i><br>
+          Chúc bé cụa tôi luôn xinh đẹp và thành công trong tất cả các quyết định của mình nhé,<br>
           mong em luôn vui và ấm áp. 🌸”
         </div>
 
@@ -354,14 +338,14 @@
               alt="Khoảnh khắc đẹp"
               loading="lazy"
             >
-            <div class="photo-caption">✨ Kỷ niệm đáng nhớ ✨</div>
+            <div class="photo-caption">✨   ✨</div>
           </div>
         </div>
 
         <div class="letter-text" style="border-left-color: #ffb6c1; border-right-color: #ff8da1;">
           <i>“Và đây là lời cuối…”</i><br>
-          Cảm ơn em vì đã ở đây,<br>
-          chúc em một ngày thật dịu dàng. 💕
+          Cảm ơn em vì đã ở cạnh anh thời gian vừa qua cho anh thêm 1 cơ hội để yêu em thương em thêm một lần nữa,<br>
+          và chúc em bé cụa anh một ngày thật dịu dàng. Hôn em 3 cái 😘😘😘 
         </div>
 
         <button class="close-btn" id="closeBtn">
@@ -373,7 +357,6 @@
 
   <script>
     (function() {
-      // ----- 1. TẠO TRÁI TIM RƠI -----
       const heartsContainer = document.getElementById('heartsBg');
       const heartCharacters = ['❤️', '💖', '💗', '💓', '💕', '❤️‍🔥', '🌸', '💘'];
       const HEART_COUNT = 45;
@@ -395,23 +378,19 @@
         heartsContainer.appendChild(heart);
       }
 
-      // ----- 2. MỞ / ĐÓNG THƯ -----
       const wrapper = document.getElementById('letterWrapper');
       const envelope = document.getElementById('envelope');
       const closeBtn = document.getElementById('closeBtn');
 
       function openLetter() {
-        // Bỏ khóa scroll
         document.documentElement.classList.remove('locked');
         document.body.classList.remove('locked');
-        // Chuyển wrapper sang trạng thái mở
         wrapper.classList.remove('closed');
         wrapper.classList.add('open');
         window.scrollTo({ top: 0, behavior: 'auto' });
       }
 
       function closeLetter() {
-        // Khóa scroll lại để phong bì căn giữa
         document.documentElement.classList.add('locked');
         document.body.classList.add('locked');
         wrapper.classList.remove('open');
@@ -432,7 +411,6 @@
         }
       });
 
-      // Touch mobile
       envelope.addEventListener('touchstart', (e) => {
         e.preventDefault();
         openLetter();
