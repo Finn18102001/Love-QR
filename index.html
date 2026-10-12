@@ -167,15 +167,13 @@
       100% { opacity: 1; transform: translateY(0) scale(1); }
     }
 
-    .letter-wrapper.open .letter-content { display: block; }
+    /* Khi mở thư: chỉ hiện bức 1 */
+    .letter-wrapper.open .letter-content.first { display: block; }
+    .letter-wrapper.open .letter-content.second { display: none; }
 
-    /* Bức thư 2 ẩn mặc định */
-    .letter-content.second {
-      display: none;
-    }
-
-    .letter-wrapper.show-second .letter-content.first { display: none; }
-    .letter-wrapper.show-second .letter-content.second { display: block; }
+    /* Khi show-second: ẩn bức 1, hiện bức 2 */
+    .letter-wrapper.open.show-second .letter-content.first { display: none; }
+    .letter-wrapper.open.show-second .letter-content.second { display: block; }
 
     .letter-content::before {
       content: '';
@@ -213,40 +211,6 @@
       color: #c93f5e;
       font-weight: 600;
       font-style: normal;
-    }
-
-    /* Khung tâm thư trống cho bức 2 */
-    .letter-blank {
-      min-height: 180px;
-      background: repeating-linear-gradient(
-        to bottom,
-        transparent 0px,
-        transparent 31px,
-        #ffd0db 31px,
-        #ffd0db 32px
-      );
-      border-radius: 16px;
-      border: 2px dashed #ffb6c1;
-      padding: 18px 16px;
-      color: #b87a8c;
-      font-size: 1rem;
-      font-style: italic;
-      line-height: 32px;
-      text-align: center;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-    }
-
-    .letter-blank::after {
-      content: '✍️ Viết tâm thư của bạn ở đây...';
-      color: #d19aaa;
-      font-style: italic;
-      background: rgba(255, 248, 250, 0.85);
-      padding: 6px 16px;
-      border-radius: 20px;
-      font-size: 0.95rem;
     }
 
     .photo-single {
@@ -376,7 +340,6 @@
       .photo-card img { border-radius: 14px; }
       .letter-text { font-size: 1rem; }
       .close-btn, .next-btn, .back-btn { padding: 12px 24px; font-size: 1rem; }
-      .letter-blank { min-height: 150px; line-height: 28px; }
     }
   </style>
 </head>
@@ -423,19 +386,26 @@
       </div>
     </div>
 
-    <!-- BỨC THƯ 2 -->
     <div class="letter-content second" id="letterContent2">
       <div class="letter-inner">
         <div class="letter-text">
-          <i>“Bức thư thứ hai…”</i><br>
-          Có những điều anh chưa kịp nói hết,<br>
-          nên anh để dành ở đây cho em. 💕
+          <i>“Hello bạn nhỏ...”</i><br>
+          Trong kịch bản không có phần này đâu<br>
+          do anh thêm vào sau khi chúng ta chia tay đấy 😔<br><br>
+          Anh không muốn sửa những lời mình đã viết ở lá thư kia đâu vì đó thực sự là
+          những gì anh muốn nói với em và đến thời điểm này nó vẫn vậy.
+          <br><br>
+          Sau những gì chúng ta bộc bạch với nhau anh đã yêu em sai cách rồi thật tâm anh không muốn trách em
+          hay muốn em nhận sai đâu chỉ là anh muốn em nhận sai đâu anh muốn em chia sẻ với anh nhiều hơn
+          nhưng hình như cách anh làm và cách anh nói làm em hiểu sai mình rồi.
+          <br><br>
+          Những gì anh chia sẻ ở đây không phải để thanh minh cho bản thân anh mà chỉ để nói ra những gì trong lòng anh nghĩ thôi!
+          Giờ thì anh biết là mình đã sai như thế nào rồi. Anh vẫn ở đây có thể sẽ rất lâu cho tới khi anh cất giấu được đoạn tình cảm này.
+          Nên nếu có gì cần anh giúp chứ nhắn nhé không sao đâu, những lần anh nói đừng nhắn nữa chỉ là tự bảo vệ bản thân mình thôi,
+          anh sợ là nếu tiếp tục nhắn với tính cách của anh có thể sẽ em đau thêm một lần nữa nên thôi vậy!
+          Anh nói vậy thôi chứ nếu em có cơ hội tìm được người mình muốn ở cạnh thì cứ tiến tới nhé không cần để ý đến toai đâu. Anh ổn mà!
         </div>
 
-        <!-- Khung tâm thư trống -->
-        <div class="letter-blank"></div>
-
-        <!-- 1 ảnh ở cuối -->
         <div class="photo-single">
           <div class="photo-card">
             <img 
