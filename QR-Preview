@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Star Catcher Game</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background: #f5f5f5;
+            margin: 0;
+            padding: 30px 15px;
+        }
+
+        #score {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 12px;
+        }
+
+        #game {
+            width: 280px;
+            height: 160px;
+            position: relative;
+            margin: 0 auto;
+            overflow: hidden;
+            background: #1e293b;
+            border: 2px solid #64748b;
+            border-radius: 8px;
+        }
+
+        #timer {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            color: white;
+            font-weight: bold;
+            font-size: 16px;
+            z-index: 2;
+        }
+
+        #star {
+            position: absolute;
+            left: 50px;
+            top: 50px;
+            font-size: 26px;
+            cursor: pointer;
+            user-select: none;
+            -webkit-user-select: none;
+            touch-action: manipulation;
+        }
+
+        #message {
+            margin: 15px auto;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        #restart {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            background: #2563eb;
+            color: white;
+            font-size: 15px;
+            cursor: pointer;
+        }
+
+        #restart:hover {
+            background: #1d4ed8;
+        }
+    </style>
+</head>
+
+<body>
+    <h2>⭐ Star Catcher</h2>
+
+    <div id="score">Score: 0</div>
+
+    <div id="game">
+        <div id="timer">10</div>
+        <div id="star" role="button" aria-label="Catch the star">⭐</div>
+    </div>
+
+    <div id="message">Nhấn vào ngôi sao để ghi điểm!</div>
+
+    <button id="restart" type="button">Chơi lại</button>
+
+    <script>
+        const game = document.getElementById("game");
+        const star = document.getElementById("star");
+        const scoreDisplay = document.getElementById("score");
+        const timerDisplay = document.getElementById("timer");
+        const message = document.getElementById("message");
+        const restartButton = document.getElementById("restart");
+
+        let x = 50;
+        let y = 50;
+        let dx = 3;
+        let dy = 2;
+        let score = 0;
+        let time = 10;
+        let playing = false;
+        let moveInterval = null;
+        let countdownInterval = null;
+
+        function move() {
+            if (!playing) return;
+
+            const maxX = game.clientWidth - star.offsetWidth;
+            const maxY = game.clientHeight - star.offsetHeight;
+
+            x += dx;
+            y += dy;
+
+            if (x <= 0 || x >= maxX) {
+                dx *= -1;
+                x = Math.max(0, Math.min(x, maxX));
+            }
+
+            if (y <= 0 || y >= maxY) {
+                dy *= -1;
+                y = Math.max(0, Math.min(y, maxY));
+            }
+
+            star.style.left = x + "px";
+            star.style.top = y + "px";
+        }
+
+        function endGame() {
+            playing = false;
+
+            clearInterval(moveInterval);
+            clearInterval(countdownInterval);
+
+            timerDisplay.textContent = "0";
+            message.textContent = "Hết giờ! Bạn đạt " + score + " điểm.";
+            star.style.cursor = "default";
+        }
+
+        function startGame() {
+            clearInterval(moveInterval);
+            clearInterval(countdownInterval);
+
+            x = 50;
+            y = 50;
+            dx = 3;
+            dy = 2;
+            score = 0;
+            time = 10;
+            playing = true;
+
+            scoreDisplay.textContent = "Score: 0";
+            timerDisplay.textContent = time;
+            message.textContent = "Nhanh tay bắt ngôi sao!";
+            star.style.left = x + "px";
+            star.style.top = y + "px";
+            star.style.cursor = "pointer";
+
+            moveInterval = setInterval(move, 30);
+
+            countdownInterval = setInterval(() => {
+                time--;
+                timerDisplay.textContent = time;
+
+                if (time <= 0) {
+                    endGame();
+                }
+            }, 1000);
+        }
+
+        star.addEventListener("click", () => {
+            if (!playing) return;
+
+            score++;
+            scoreDisplay.textContent = "Score: " + score;
+
+            // Đổi hướng nhẹ sau mỗi lần bắt được sao
+            dx = (Math.random() < 0.5 ? -1 : 1)
+                * (2 + Math.random() * 3);
+            dy = (Math.random() < 0.5 ? -1 : 1)
+                * (2 + Math.random() * 3);
+        });
+
+        restartButton.addEventListener("click", startGame);
+
+        startGame();
+    </script>
+</body>
+</html>
+```
