@@ -2,7 +2,7 @@
 <html lang="vi">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
   <title>Lá thư hồng • Trái tim rơi</title>
   <style>
     * {
@@ -12,15 +12,26 @@
       font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
     }
 
+    /* Cho phép scroll toàn trang */
+    html, body {
+      width: 100%;
+      min-height: 100%;
+      overflow-x: hidden;
+      overflow-y: auto;
+      scroll-behavior: smooth;
+    }
+
     body {
-      min-height: 100vh;
       background: linear-gradient(145deg, #1a0e1e 0%, #2c1a2e 100%);
       display: flex;
       align-items: center;
       justify-content: center;
-      overflow: hidden;
       position: relative;
-      padding: 16px;
+      padding: 20px 16px 60px; /* padding bottom cho mobile */
+      min-height: 100vh;
+      /* Cho phép scroll trên toàn bộ body */
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
     }
 
     /* ---------- TRÁI TIM RƠI (BACKGROUND) ---------- */
@@ -63,7 +74,13 @@
       z-index: 20;
       width: 100%;
       max-width: 720px;
+      margin: auto; /* căn giữa */
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
       perspective: 1200px;
+      transition: all 0.4s;
     }
 
     /* Lá thư phong bì màu hồng (đóng) */
@@ -79,6 +96,8 @@
       position: relative;
       transform-style: preserve-3d;
       transform: rotateX(0deg);
+      width: 100%;
+      max-width: 500px;
     }
 
     .envelope:hover {
@@ -90,7 +109,6 @@
       transform: scale(0.99);
     }
 
-    /* Nội dung trên phong bì */
     .envelope .heart-icon {
       font-size: 5rem;
       line-height: 1;
@@ -130,14 +148,12 @@
 
     /* ---------- BỨC THƯ MỞ (ẨN BAN ĐẦU) ---------- */
     .letter-content {
-      position: absolute;
-      top: 0;
-      left: 0;
+      position: relative;
       width: 100%;
       background: #fff8fa;
       background-image: radial-gradient(circle at 10% 20%, #fff0f5 0%, #ffe4ec 100%);
       border-radius: 28px;
-      padding: 32px 30px;
+      padding: 32px 24px;
       box-shadow: 0 30px 60px rgba(0, 0, 0, 0.7), 0 0 0 2px #ffd0db inset, 0 0 50px #ff8aa0;
       border: 1px solid #ffb7c5;
       transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
@@ -145,24 +161,23 @@
       visibility: hidden;
       transform: translateY(20px) scale(0.96);
       pointer-events: none;
-      max-height: 85vh;
-      overflow-y: auto;
-      scrollbar-width: thin;
-      scrollbar-color: #ff8da1 #ffe2eb;
+      /* KHÔNG dùng max-height và overflow nữa, để body scroll */
+      max-height: none;
+      overflow: visible;
+      /* Hiệu ứng giấy */
+      position: relative;
     }
 
-    .letter-content::-webkit-scrollbar {
-      width: 8px;
-    }
-
-    .letter-content::-webkit-scrollbar-track {
-      background: #ffe2eb;
-      border-radius: 10px;
-    }
-
-    .letter-content::-webkit-scrollbar-thumb {
-      background: #ff8da1;
-      border-radius: 10px;
+    .letter-content::before {
+      content: '';
+      position: absolute;
+      top: 12px;
+      left: 20px;
+      right: 20px;
+      height: 4px;
+      background: repeating-linear-gradient(90deg, #ffb6c1, #ffb6c1 10px, transparent 10px, transparent 20px);
+      border-radius: 4px;
+      opacity: 0.5;
     }
 
     /* Khi mở thư */
@@ -171,6 +186,10 @@
       visibility: hidden;
       pointer-events: none;
       transform: scale(0.9) rotateX(10deg);
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
     }
 
     .letter-wrapper.open .letter-content {
@@ -208,48 +227,48 @@
       font-style: normal;
     }
 
-    .photo-grid {
+    /* KHU VỰC ẢNH - CHỈ 1 ẢNH DUY NHẤT, TO HƠN */
+    .photo-single {
       display: flex;
-      flex-wrap: wrap;
       justify-content: center;
       align-items: center;
-      gap: 18px;
       margin: 8px 0;
+      padding: 0 8px;
     }
 
-    .photo-card {
+    .photo-single .photo-card {
       background: white;
-      padding: 12px 12px 16px 12px;
-      border-radius: 20px 20px 24px 24px;
+      padding: 16px 16px 20px 16px;
+      border-radius: 24px 24px 28px 28px;
       box-shadow: 0 12px 22px rgba(200, 80, 110, 0.35), 0 0 0 1px #ffb7c5;
-      transform: rotate(var(--rot, 0deg));
       transition: transform 0.3s ease, box-shadow 0.3s;
-      max-width: 170px;
-      flex: 0 1 auto;
+      max-width: 360px; /* Tăng kích thước tối đa */
+      width: 100%;
+      transform: rotate(-1deg);
     }
 
-    .photo-card:hover {
-      transform: rotate(0deg) scale(1.03);
+    .photo-single .photo-card:hover {
+      transform: rotate(0deg) scale(1.02);
       box-shadow: 0 18px 30px rgba(255, 70, 110, 0.5), 0 0 0 2px #ff8da1;
     }
 
-    .photo-card img {
+    .photo-single .photo-card img {
       width: 100%;
       height: auto;
       display: block;
-      border-radius: 12px;
+      border-radius: 16px;
       background: #ffeef2;
       border: 2px solid #ffd0db;
-      aspect-ratio: 1/1;
+      aspect-ratio: 4/3; /* Tỉ lệ ảnh đẹp hơn */
       object-fit: cover;
     }
 
-    .photo-caption {
-      font-size: 0.8rem;
+    .photo-single .photo-caption {
+      font-size: 1rem;
       color: #a14e64;
       text-align: center;
-      margin-top: 8px;
-      font-weight: 500;
+      margin-top: 12px;
+      font-weight: 600;
       letter-spacing: 0.5px;
     }
 
@@ -259,11 +278,11 @@
       background: #ffb6c1;
       border: none;
       border-radius: 50px;
-      padding: 12px 36px;
+      padding: 14px 40px;
       font-size: 1.1rem;
       font-weight: 600;
       color: #4d1e2b;
-      margin-top: 12px;
+      margin-top: 8px;
       cursor: pointer;
       box-shadow: 0 6px 0 #b34b62, 0 8px 18px rgba(180, 50, 80, 0.4);
       transition: all 0.15s;
@@ -286,26 +305,20 @@
       box-shadow: 0 2px 0 #b34b62, 0 8px 18px rgba(180, 50, 80, 0.4);
     }
 
-    /* Điều chỉnh ảnh trên mobile */
+    /* Điều chỉnh trên mobile */
     @media (max-width: 540px) {
       .envelope h1 { font-size: 1.9rem; }
       .envelope .heart-icon { font-size: 3.8rem; }
       .letter-content { padding: 22px 16px; }
-      .photo-card { max-width: 130px; }
+      .photo-single .photo-card { max-width: 100%; padding: 12px 12px 16px; }
+      .photo-single .photo-card img { border-radius: 14px; }
       .letter-text { font-size: 1rem; }
+      .close-btn { padding: 12px 28px; font-size: 1rem; }
     }
 
-    /* Hiệu ứng lá thư giấy */
-    .letter-content::before {
-      content: '';
-      position: absolute;
-      top: 12px;
-      left: 20px;
-      right: 20px;
-      height: 4px;
-      background: repeating-linear-gradient(90deg, #ffb6c1, #ffb6c1 10px, transparent 10px, transparent 20px);
-      border-radius: 4px;
-      opacity: 0.5;
+    /* Đảm bảo khi mở thư, toàn bộ nội dung hiển thị tốt */
+    .letter-wrapper.open {
+      display: block;
     }
   </style>
 </head>
@@ -333,34 +346,15 @@
           mong em luôn vui và ấm áp. 🌸”
         </div>
 
-        <!-- 3 BỨC ẢNH Ở GIỮA -->
-        <div class="photo-grid">
-          <!-- Ảnh 1 -->
-          <div class="photo-card" style="--rot: -3deg;">
+        <!-- 1 BỨC ẢNH DUY NHẤT, TO HƠN -->
+        <div class="photo-single">
+          <div class="photo-card">
             <img 
-              src="https://picsum.photos/id/1015/400/400" 
-              alt="Khoảnh khắc 1"
+              src="https://picsum.photos/id/1015/800/600" 
+              alt="Khoảnh khắc đẹp"
               loading="lazy"
             >
-            <div class="photo-caption">✨ Kỷ niệm 1</div>
-          </div>
-          <!-- Ảnh 2 -->
-          <div class="photo-card" style="--rot: 2deg;">
-            <img 
-              src="https://picsum.photos/id/1043/400/400" 
-              alt="Khoảnh khắc 2"
-              loading="lazy"
-            >
-            <div class="photo-caption">🌸 Kỷ niệm 2</div>
-          </div>
-          <!-- Ảnh 3 -->
-          <div class="photo-card" style="--rot: -1deg;">
-            <img 
-              src="https://picsum.photos/id/1069/400/400" 
-              alt="Khoảnh khắc 3"
-              loading="lazy"
-            >
-            <div class="photo-caption">💖 Kỷ niệm 3</div>
+            <div class="photo-caption">✨ Kỷ niệm đáng nhớ ✨</div>
           </div>
         </div>
 
@@ -384,38 +378,30 @@
       // ----- 1. TẠO TRÁI TIM RƠI -----
       const heartsContainer = document.getElementById('heartsBg');
       const heartCharacters = ['❤️', '💖', '💗', '💓', '💕', '❤️‍🔥', '🌸', '💘'];
-      const HEART_COUNT = 45; // số lượng trái tim
+      const HEART_COUNT = 45;
 
-      // Tạo các trái tim với vị trí, kích thước, thời gian rơi khác nhau
       for (let i = 0; i < HEART_COUNT; i++) {
         const heart = document.createElement('div');
         heart.classList.add('heart-fall');
         
-        // Chọn biểu tượng ngẫu nhiên
         const randomChar = heartCharacters[Math.floor(Math.random() * heartCharacters.length)];
         heart.textContent = randomChar;
 
-        // Vị trí ngang ngẫu nhiên (0% - 100%)
         const leftPos = Math.random() * 100;
         heart.style.left = leftPos + '%';
 
-        // Kích thước ngẫu nhiên (0.8rem - 2.5rem)
         const size = 0.8 + Math.random() * 1.8;
         heart.style.fontSize = size + 'rem';
 
-        // Thời gian rơi ngẫu nhiên (6s - 18s)
         const duration = 6 + Math.random() * 14;
         heart.style.animationDuration = duration + 's';
 
-        // Độ trễ ngẫu nhiên (0s - 12s) để trái tim rơi không đồng loạt
         const delay = Math.random() * 12;
         heart.style.animationDelay = delay + 's';
 
-        // Góc quay ban đầu ngẫu nhiên
         const rotateStart = Math.random() * 360;
         heart.style.transform = `rotate(${rotateStart}deg)`;
 
-        // Thêm độ mờ khác nhau
         heart.style.opacity = 0.5 + Math.random() * 0.5;
 
         heartsContainer.appendChild(heart);
@@ -427,44 +413,39 @@
       const closeBtn = document.getElementById('closeBtn');
       const letterContent = document.getElementById('letterContent');
 
-      // Hàm mở thư
       function openLetter() {
         wrapper.classList.add('open');
-        // Cuộn lên đầu thư khi mở (nếu nội dung dài)
+        // Khi mở, cuộn lên đầu trang để thấy thư từ đầu
+        window.scrollTo({ top: 0, behavior: 'smooth' });
         if (letterContent) {
-          letterContent.scrollTop = 0;
+          // Không cần scroll bên trong nữa
         }
       }
 
-      // Hàm đóng thư
       function closeLetter() {
         wrapper.classList.remove('open');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
       }
 
-      // Click vào phong bì -> mở thư
       envelope.addEventListener('click', openLetter);
 
-      // Click nút đóng -> đóng thư
       closeBtn.addEventListener('click', (e) => {
-        e.stopPropagation(); // tránh sự kiện lan ra ngoài
+        e.stopPropagation();
         closeLetter();
       });
 
-      // (Tùy chọn) Nhấn ESC để đóng thư
       document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape' && wrapper.classList.contains('open')) {
           closeLetter();
         }
       });
 
-      // Ngăn chặn click vào nội dung thư bị đóng khi bấm ra ngoài (không cần thiết, giữ nguyên)
-      // Nhưng thêm touch cho mobile mượt
+      // Touch cho mobile
       envelope.addEventListener('touchstart', (e) => {
-        e.preventDefault(); // tránh double tap
+        e.preventDefault();
         openLetter();
       }, { passive: false });
 
-      // Đảm bảo nút đóng cũng nhận touch
       closeBtn.addEventListener('touchstart', (e) => {
         e.preventDefault();
         e.stopPropagation();
@@ -473,7 +454,5 @@
 
     })();
   </script>
-
-  <!-- Chú thích: Ảnh sử dụng picsum.photos (ảnh ngẫu nhiên) -->
 </body>
 </html>
