@@ -61,14 +61,8 @@
     }
 
     @keyframes fall {
-      0% {
-        transform: translateY(0) rotate(0deg) scale(1);
-        opacity: 0.9;
-      }
-      100% {
-        transform: translateY(115vh) rotate(360deg) scale(1.2);
-        opacity: 0.3;
-      }
+      0% { transform: translateY(0) rotate(0deg) scale(1); opacity: 0.9; }
+      100% { transform: translateY(115vh) rotate(360deg) scale(1.2); opacity: 0.3; }
     }
 
     .letter-wrapper {
@@ -92,6 +86,7 @@
       padding: 20px 16px 32px;
     }
 
+    /* Phong bì */
     .envelope {
       background: linear-gradient(135deg, #ffb6c1 0%, #ff8da1 100%);
       border-radius: 24px 24px 18px 18px;
@@ -104,7 +99,6 @@
       width: 100%;
       max-width: 500px;
       transform-style: preserve-3d;
-      transform: rotateX(0deg);
     }
 
     .envelope:hover {
@@ -112,9 +106,7 @@
       box-shadow: 0 30px 55px rgba(255, 80, 120, 0.5), 0 0 0 3px #ffe2eb inset, 0 0 50px #ff4d6d;
     }
 
-    .envelope:active {
-      transform: scale(0.99);
-    }
+    .envelope:active { transform: scale(0.99); }
 
     .envelope .heart-icon {
       font-size: 5rem;
@@ -152,10 +144,9 @@
       border: 1px solid #ffeef2;
     }
 
-    .letter-wrapper.open .envelope {
-      display: none;
-    }
+    .letter-wrapper.open .envelope { display: none; }
 
+    /* Bức thư chung */
     .letter-content {
       display: none;
       width: 100%;
@@ -172,19 +163,19 @@
     }
 
     @keyframes letterIn {
-      0% {
-        opacity: 0;
-        transform: translateY(20px) scale(0.96);
-      }
-      100% {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-      }
+      0% { opacity: 0; transform: translateY(20px) scale(0.96); }
+      100% { opacity: 1; transform: translateY(0) scale(1); }
     }
 
-    .letter-wrapper.open .letter-content {
-      display: block;
+    .letter-wrapper.open .letter-content { display: block; }
+
+    /* Bức thư 2 ẩn mặc định */
+    .letter-content.second {
+      display: none;
     }
+
+    .letter-wrapper.show-second .letter-content.first { display: none; }
+    .letter-wrapper.show-second .letter-content.second { display: block; }
 
     .letter-content::before {
       content: '';
@@ -222,6 +213,40 @@
       color: #c93f5e;
       font-weight: 600;
       font-style: normal;
+    }
+
+    /* Khung tâm thư trống cho bức 2 */
+    .letter-blank {
+      min-height: 180px;
+      background: repeating-linear-gradient(
+        to bottom,
+        transparent 0px,
+        transparent 31px,
+        #ffd0db 31px,
+        #ffd0db 32px
+      );
+      border-radius: 16px;
+      border: 2px dashed #ffb6c1;
+      padding: 18px 16px;
+      color: #b87a8c;
+      font-size: 1rem;
+      font-style: italic;
+      line-height: 32px;
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .letter-blank::after {
+      content: '✍️ Viết tâm thư của bạn ở đây...';
+      color: #d19aaa;
+      font-style: italic;
+      background: rgba(255, 248, 250, 0.85);
+      padding: 6px 16px;
+      border-radius: 20px;
+      font-size: 0.95rem;
     }
 
     .photo-single {
@@ -299,6 +324,48 @@
       box-shadow: 0 2px 0 #b34b62, 0 8px 18px rgba(180, 50, 80, 0.4);
     }
 
+    /* Nút chuyển tiếp */
+    .next-btn {
+      background: #ffd0db;
+      border: 2px solid #ff8da1;
+      color: #8c2e48;
+      box-shadow: 0 6px 0 #cc7a8c, 0 8px 18px rgba(200, 80, 110, 0.35);
+    }
+
+    .next-btn:hover {
+      background: #ffbccb;
+      box-shadow: 0 8px 0 #cc7a8c, 0 12px 24px rgba(255, 80, 120, 0.5);
+    }
+
+    .next-btn:active {
+      box-shadow: 0 2px 0 #cc7a8c, 0 8px 18px rgba(200, 80, 110, 0.35);
+    }
+
+    /* Nút quay về (bức 2) */
+    .back-btn {
+      background: #ffe4ec;
+      border: 2px solid #ffb6c1;
+      color: #a14e64;
+      box-shadow: 0 6px 0 #d9a0ad, 0 8px 18px rgba(200, 80, 110, 0.3);
+    }
+
+    .back-btn:hover {
+      background: #ffd0db;
+      box-shadow: 0 8px 0 #d9a0ad, 0 12px 24px rgba(255, 80, 120, 0.45);
+    }
+
+    .back-btn:active {
+      box-shadow: 0 2px 0 #d9a0ad, 0 8px 18px rgba(200, 80, 110, 0.3);
+    }
+
+    .btn-row {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 8px;
+    }
+
     @media (max-width: 540px) {
       .letter-wrapper { padding: 16px 12px; }
       .letter-wrapper.open { padding: 16px 12px 28px; }
@@ -308,7 +375,8 @@
       .photo-card { max-width: 100%; padding: 12px 12px 16px; }
       .photo-card img { border-radius: 14px; }
       .letter-text { font-size: 1rem; }
-      .close-btn { padding: 12px 28px; font-size: 1rem; }
+      .close-btn, .next-btn, .back-btn { padding: 12px 24px; font-size: 1rem; }
+      .letter-blank { min-height: 150px; line-height: 28px; }
     }
   </style>
 </head>
@@ -323,7 +391,8 @@
       <p>❤️ Đặt cái ngón tay bé xíu của em vào đây nhanh lên 😤 ❤️</p>
     </div>
 
-    <div class="letter-content" id="letterContent">
+    <!-- BỨC THƯ 1 -->
+    <div class="letter-content first" id="letterContent1">
       <div class="letter-inner">
         <div class="letter-text">
           <i>“Em bé ơi chúc mừng 20/10</i><br>
@@ -348,9 +417,44 @@
           và chúc em bé cụa anh một ngày thật dịu dàng. Hôn em 3 cái 😘😘😘 
         </div>
 
-        <button class="close-btn" id="closeBtn">
-          <span>↺</span> Đóng thư
+        <button class="close-btn next-btn" id="nextBtn">
+          <span>💌</span> Mở bức thư tiếp theo
         </button>
+      </div>
+    </div>
+
+    <!-- BỨC THƯ 2 -->
+    <div class="letter-content second" id="letterContent2">
+      <div class="letter-inner">
+        <div class="letter-text">
+          <i>“Bức thư thứ hai…”</i><br>
+          Có những điều anh chưa kịp nói hết,<br>
+          nên anh để dành ở đây cho em. 💕
+        </div>
+
+        <!-- Khung tâm thư trống -->
+        <div class="letter-blank"></div>
+
+        <!-- 1 ảnh ở cuối -->
+        <div class="photo-single">
+          <div class="photo-card">
+            <img 
+              src="https://picsum.photos/id/1043/800/600" 
+              alt="Khoảnh khắc cuối"
+              loading="lazy"
+            >
+            <div class="photo-caption">✨   ✨</div>
+          </div>
+        </div>
+
+        <div class="btn-row">
+          <button class="close-btn back-btn" id="backBtn">
+            <span>↺</span> Quay lại
+          </button>
+          <button class="close-btn" id="closeBtn">
+            <span>✕</span> Đóng thư
+          </button>
+        </div>
       </div>
     </div>
   </div>
@@ -380,6 +484,8 @@
 
       const wrapper = document.getElementById('letterWrapper');
       const envelope = document.getElementById('envelope');
+      const nextBtn = document.getElementById('nextBtn');
+      const backBtn = document.getElementById('backBtn');
       const closeBtn = document.getElementById('closeBtn');
 
       function openLetter() {
@@ -387,6 +493,7 @@
         document.body.classList.remove('locked');
         wrapper.classList.remove('closed');
         wrapper.classList.add('open');
+        wrapper.classList.remove('show-second');
         window.scrollTo({ top: 0, behavior: 'auto' });
       }
 
@@ -394,16 +501,25 @@
         document.documentElement.classList.add('locked');
         document.body.classList.add('locked');
         wrapper.classList.remove('open');
+        wrapper.classList.remove('show-second');
         wrapper.classList.add('closed');
         window.scrollTo({ top: 0, behavior: 'auto' });
       }
 
-      envelope.addEventListener('click', openLetter);
+      function goToSecond() {
+        wrapper.classList.add('show-second');
+        window.scrollTo({ top: 0, behavior: 'auto' });
+      }
 
-      closeBtn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        closeLetter();
-      });
+      function goToFirst() {
+        wrapper.classList.remove('show-second');
+        window.scrollTo({ top: 0, behavior: 'auto' });
+      }
+
+      envelope.addEventListener('click', openLetter);
+      nextBtn.addEventListener('click', (e) => { e.stopPropagation(); goToSecond(); });
+      backBtn.addEventListener('click', (e) => { e.stopPropagation(); goToFirst(); });
+      closeBtn.addEventListener('click', (e) => { e.stopPropagation(); closeLetter(); });
 
       document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape' && wrapper.classList.contains('open')) {
@@ -414,6 +530,18 @@
       envelope.addEventListener('touchstart', (e) => {
         e.preventDefault();
         openLetter();
+      }, { passive: false });
+
+      nextBtn.addEventListener('touchstart', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        goToSecond();
+      }, { passive: false });
+
+      backBtn.addEventListener('touchstart', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        goToFirst();
       }, { passive: false });
 
       closeBtn.addEventListener('touchstart', (e) => {
