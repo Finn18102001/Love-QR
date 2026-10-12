@@ -167,11 +167,9 @@
       100% { opacity: 1; transform: translateY(0) scale(1); }
     }
 
-    /* Khi mở thư: chỉ hiện bức 1 */
     .letter-wrapper.open .letter-content.first { display: block; }
     .letter-wrapper.open .letter-content.second { display: none; }
 
-    /* Khi show-second: ẩn bức 1, hiện bức 2 */
     .letter-wrapper.open.show-second .letter-content.first { display: none; }
     .letter-wrapper.open.show-second .letter-content.second { display: block; }
 
@@ -213,6 +211,74 @@
       font-style: normal;
     }
 
+    /* ---------- 2 ẢNH BỐ CỤC NĂNG ĐỘNG ---------- */
+    .photo-duo {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 4px;
+      margin: 8px 0;
+      padding: 10px 0;
+      position: relative;
+    }
+
+    .photo-duo .photo-card {
+      flex: 0 1 46%;
+      max-width: 230px;
+      min-width: 0;
+      padding: 12px 12px 16px;
+      background: white;
+      border-radius: 20px 20px 24px 24px;
+      box-shadow: 0 12px 22px rgba(200, 80, 110, 0.35), 0 0 0 1px #ffb7c5;
+      transition: transform 0.4s cubic-bezier(0.2, 0.9, 0.3, 1.1), box-shadow 0.3s, z-index 0.3s;
+      position: relative;
+    }
+
+    /* Ảnh trái: nghiêng trái, hạ thấp, nổi bật hơn */
+    .photo-duo .photo-card.left {
+      transform: rotate(-5deg) translateY(10px) translateX(6px);
+      z-index: 2;
+    }
+
+    /* Ảnh phải: nghiêng phải, nâng cao, chồng nhẹ lên ảnh trái */
+    .photo-duo .photo-card.right {
+      transform: rotate(5deg) translateY(-10px) translateX(-6px);
+      z-index: 3;
+    }
+
+    .photo-duo .photo-card.left:hover {
+      transform: rotate(-2deg) translateY(4px) translateX(4px) scale(1.05);
+      box-shadow: 0 18px 30px rgba(255, 70, 110, 0.5), 0 0 0 2px #ff8da1;
+      z-index: 10;
+    }
+
+    .photo-duo .photo-card.right:hover {
+      transform: rotate(2deg) translateY(-4px) translateX(-4px) scale(1.05);
+      box-shadow: 0 18px 30px rgba(255, 70, 110, 0.5), 0 0 0 2px #ff8da1;
+      z-index: 10;
+    }
+
+    .photo-duo .photo-card img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 14px;
+      background: #ffeef2;
+      border: 2px solid #ffd0db;
+      aspect-ratio: 4/3;
+      object-fit: cover;
+    }
+
+    .photo-duo .photo-caption {
+      font-size: 0.85rem;
+      color: #a14e64;
+      text-align: center;
+      margin-top: 10px;
+      font-weight: 600;
+      letter-spacing: 0.3px;
+    }
+
+    /* Ảnh đơn ở bức 2 */
     .photo-single {
       display: flex;
       justify-content: center;
@@ -220,7 +286,7 @@
       margin: 8px 0;
     }
 
-    .photo-card {
+    .photo-single .photo-card {
       background: white;
       padding: 16px 16px 20px;
       border-radius: 24px 24px 28px 28px;
@@ -231,12 +297,12 @@
       transform: rotate(-1deg);
     }
 
-    .photo-card:hover {
+    .photo-single .photo-card:hover {
       transform: rotate(0deg) scale(1.02);
       box-shadow: 0 18px 30px rgba(255, 70, 110, 0.5), 0 0 0 2px #ff8da1;
     }
 
-    .photo-card img {
+    .photo-single .photo-card img {
       width: 100%;
       height: auto;
       display: block;
@@ -247,7 +313,7 @@
       object-fit: cover;
     }
 
-    .photo-caption {
+    .photo-single .photo-caption {
       font-size: 1rem;
       color: #a14e64;
       text-align: center;
@@ -288,7 +354,6 @@
       box-shadow: 0 2px 0 #b34b62, 0 8px 18px rgba(180, 50, 80, 0.4);
     }
 
-    /* Nút chuyển tiếp */
     .next-btn {
       background: #ffd0db;
       border: 2px solid #ff8da1;
@@ -305,7 +370,6 @@
       box-shadow: 0 2px 0 #cc7a8c, 0 8px 18px rgba(200, 80, 110, 0.35);
     }
 
-    /* Nút quay về (bức 2) */
     .back-btn {
       background: #ffe4ec;
       border: 2px solid #ffb6c1;
@@ -336,10 +400,26 @@
       .envelope h1 { font-size: 1.9rem; }
       .envelope .heart-icon { font-size: 3.8rem; }
       .letter-content { padding: 22px 16px; border-radius: 22px; }
-      .photo-card { max-width: 100%; padding: 12px 12px 16px; }
-      .photo-card img { border-radius: 14px; }
       .letter-text { font-size: 1rem; }
       .close-btn, .next-btn, .back-btn { padding: 12px 24px; font-size: 1rem; }
+
+      .photo-duo { gap: 0; }
+      .photo-duo .photo-card {
+        flex: 0 1 48%;
+        max-width: none;
+        padding: 8px 8px 12px;
+      }
+      .photo-duo .photo-card.left {
+        transform: rotate(-4deg) translateY(6px) translateX(3px);
+      }
+      .photo-duo .photo-card.right {
+        transform: rotate(4deg) translateY(-6px) translateX(-3px);
+      }
+      .photo-duo .photo-card img { border-radius: 10px; }
+      .photo-duo .photo-caption { font-size: 0.75rem; margin-top: 6px; }
+
+      .photo-single .photo-card { max-width: 100%; padding: 12px 12px 16px; }
+      .photo-single .photo-card img { border-radius: 14px; }
     }
   </style>
 </head>
@@ -363,14 +443,23 @@
           mong em luôn vui vẻ, và đặc biệt là biết cách sử dụng người đàn ông này!!!😤”
         </div>
 
-        <div class="photo-single">
-          <div class="photo-card">
+        <!-- 2 ẢNH BỐ CỤC NĂNG ĐỘNG -->
+        <div class="photo-duo">
+          <div class="photo-card left">
             <img 
               src="https://res.cloudinary.com/vutyjgon/image/upload/f_auto,q_auto/Industrial_Fluorescent_Selfie_Portrait" 
-              alt="Khoảnh khắc đẹp"
+              alt="Khoảnh khắc 1"
               loading="lazy"
             >
-            <div class="photo-caption">✨   ✨</div>
+            <div class="photo-caption">✨ Chúng ta ✨</div>
+          </div>
+          <div class="photo-card right">
+            <img 
+              src="https://res.cloudinary.com/vutyjgon/image/upload/f_auto,q_auto/Bright_Classroom_Selfie_Portrait" 
+              alt="Khoảnh khắc 2"
+              loading="lazy"
+            >
+            <div class="photo-caption">💕 Của nhau 💕</div>
           </div>
         </div>
 
@@ -386,6 +475,7 @@
       </div>
     </div>
 
+    <!-- BỨC THƯ 2 -->
     <div class="letter-content second" id="letterContent2">
       <div class="letter-inner">
         <div class="letter-text">
