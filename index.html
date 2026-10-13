@@ -211,6 +211,68 @@
       font-style: normal;
     }
 
+    /* ---------- STYLE RIÊNG CHO BỨC THƯ 2 ---------- */
+    .letter-text.long-letter {
+      text-align: left;
+      font-style: normal;
+      font-size: 1.05rem;
+      line-height: 1.8;
+      padding: 22px 22px;
+      border-radius: 20px;
+      border-left: 6px solid #ff8da1;
+      border-right: 1px solid #ffd0db;
+      background: rgba(255, 245, 248, 0.85);
+      color: #4a2c3a;
+    }
+
+    .letter-text.long-letter .greeting {
+      display: block;
+      font-style: italic;
+      font-weight: 600;
+      color: #c93f5e;
+      font-size: 1.15rem;
+      margin-bottom: 14px;
+      text-align: center;
+    }
+
+    .letter-text.long-letter p {
+      margin-bottom: 16px;
+    }
+
+    .letter-text.long-letter p:last-child {
+      margin-bottom: 0;
+    }
+
+    .letter-text.long-letter .divider {
+      display: block;
+      text-align: center;
+      color: #ff8da1;
+      letter-spacing: 6px;
+      margin: 20px 0 18px;
+      font-size: 0.95rem;
+    }
+
+    .letter-text.long-letter .highlight {
+      color: #c93f5e;
+      font-weight: 600;
+    }
+
+    .letter-text.long-letter .emoji-line {
+      display: block;
+      text-align: center;
+      font-size: 1.2rem;
+      margin: 6px 0;
+    }
+
+    .letter-text.long-letter .signature {
+      display: block;
+      text-align: right;
+      font-style: italic;
+      color: #a14e64;
+      margin-top: 18px;
+      font-weight: 500;
+    }
+
     /* ---------- 2 ẢNH BỐ CỤC NĂNG ĐỘNG ---------- */
     .photo-duo {
       display: flex;
@@ -234,13 +296,11 @@
       position: relative;
     }
 
-    /* Ảnh trái: nghiêng trái, hạ thấp, nổi bật hơn */
     .photo-duo .photo-card.left {
       transform: rotate(-5deg) translateY(10px) translateX(6px);
       z-index: 2;
     }
 
-    /* Ảnh phải: nghiêng phải, nâng cao, chồng nhẹ lên ảnh trái */
     .photo-duo .photo-card.right {
       transform: rotate(5deg) translateY(-10px) translateX(-6px);
       z-index: 3;
@@ -401,6 +461,7 @@
       .envelope .heart-icon { font-size: 3.8rem; }
       .letter-content { padding: 22px 16px; border-radius: 22px; }
       .letter-text { font-size: 1rem; }
+      .letter-text.long-letter { font-size: 0.98rem; padding: 18px 16px; line-height: 1.75; }
       .close-btn, .next-btn, .back-btn { padding: 12px 24px; font-size: 1rem; }
 
       .photo-duo { gap: 0; }
@@ -474,42 +535,51 @@
       </div>
     </div>
 
-    <!-- BỨC THƯ 2 -->
+    <!-- BỨC THƯ 2 - ĐÃ CHIA KHỔ LẠI -->
     <div class="letter-content second" id="letterContent2">
       <div class="letter-inner">
-        <div class="letter-text">
-          <i>“Hello bạn nhỏ...”</i><br>
-          Trong kịch bản không có phần này đâu<br>
-          do anh thêm vào sau khi chúng ta chia tay đấy 😔<br><br>
-          Anh không muốn sửa lại những lời mình đã viết trong lá thư kia đâu,
-          vì đó thực sự là tất cả những gì anh muốn nói với em vào thời điểm ấy
-          Và đến tận bây giờ, những lời đó vẫn vậy!!
-          <br><br>
-          Sau tất cả những gì chúng ta đã bộc bạch với nhau, anh mới nhận ra rằng hóa ra mình đã yêu em sai cách mất rồi.
-          Anh cứ nghĩ rằng chỉ cần mình thật lòng yêu em, thật lòng muốn tốt cho em thì em sẽ hiểu được những gì anh muốn nói,
-          những gì anh muốn làm. thật tâm anh không muốn trách em hay muốn em nhận sai đâu chỉ là anh muốn em nhận sai đâu anh muốn em chia sẻ với anh nhiều hơn
-          nhưng hình như cách anh làm và cách anh nói làm em hiểu sai mình rồi.
-           <br><br>
-          Thật lòng anh chưa bao giờ muốn trách em, càng không muốn em phải nhận mình là người sai. Điều anh mong 
-          muốn chỉ là em có thể chia sẻ với anh nhiều hơn một chút, nói cho anh biết em đang nghĩ gì, đang buồn chuyện gì, để anh có cơ hội hiểu em hơn, để anh biết mình nên làm gì và thay đổi như thế nào để cả hai có thể cùng nhau tốt hơn.
-          Với cả anh không biết biện minh như thế nào với những gì anh đã làm khi 2 đứa ở bên nhau và để em hiểu là anh muốn hơn thua với em một
-          lần nào cả và thực sự trong thâm tâm của anh không hề muốn nó xảy ra vì thắng người mình thương là chưa thương người mình thắng mà
-          nhưng mà những gì em thấy lại ngược lại với nhũng gì mà anh thực sự muốn 😭😭😭. Xu cà na thật!!!!
-          <br><br>
-          Những gì anh viết ở đây không phải để thanh minh cho bản thân, cũng chẳng phải để mong em phải hiểu cho anh hay thay đổi suy nghĩ về
-          những chuyện đã qua rồi! Anh chỉ muốn một lần nói hết những điều còn ở trong lòng mình, những điều mà có lẽ khi chúng ta còn bên nhau, 
-          anh đã không biết cách nói ra sao cho em hiểu. Anh biết lời xin lỗi không thể làm những chuyện đã xảy ra trở nên chưa từng tồn tại 😔😔😔, 
-          và việc anh nhận ra mình sai cũng chẳng thể xóa đi những tổn thương em đã phải chịu, nó vẫn ở đó như em nói á người bị đau mới là người nhớ.
-          Nhưng ít nhất, anh muốn em biết anh đã thật sự suy nghĩ về tất cả những gì anh đã làm, đã nhìn lại bản thân mình 
-          và hiểu được rằng tình yêu không phải chỉ cần thương em thật nhiều là đủ, mà còn phải biết cách để em ấy cảm thấy được yêu thương.
-           <br><br>
-          Những gì anh chia sẻ ở đây không phải để thanh minh cho bản thân anh mà chỉ để nói ra những gì trong lòng anh nghĩ thôi!
-          Giờ thì anh biết là mình đã sai như thế nào rồi. Anh vẫn ở đây có thể sẽ rất lâu cho tới khi anh cất giấu được đoạn tình cảm này.
-          Nên nếu có gì cần anh giúp chứ nhắn nhé không sao đâu, những lần anh nói đừng nhắn nữa chỉ là tự bảo vệ bản thân mình thôi,
-          anh sợ là nếu tiếp tục nhắn với tính cách của anh có thể sẽ em đau thêm một lần nữa nên thôi vậy!
-          Anh nói vậy thôi chứ nếu em có cơ hội tìm được người mình muốn ở cạnh thì cứ tiến tới nhé không cần để ý đến toai đâu. Anh ổn mà!
+        <div class="letter-text long-letter">
+          <span class="greeting">“Hello bạn nhỏ...”</span>
+
+          <p>Trong kịch bản không có phần này đâu, do anh thêm vào sau khi chúng ta chia tay đấy 😔</p>
+
+          <p>Anh không muốn sửa lại những lời mình đã viết trong lá thư kia, vì đó thực sự là tất cả những gì anh muốn nói với em vào thời điểm ấy. Và đến tận bây giờ, những lời đó vẫn vậy.</p>
+
+          <span class="divider">• • •</span>
+
+          <p>Sau tất cả những gì chúng ta đã bộc bạch với nhau, anh mới nhận ra rằng hóa ra mình đã yêu em sai cách mất rồi. Anh cứ nghĩ rằng chỉ cần mình thật lòng yêu em, thật lòng muốn tốt cho em thì em sẽ hiểu được những gì anh muốn nói, những gì anh muốn làm.</p>
+
+          <p>Thật tâm anh không muốn trách em, càng không muốn em phải nhận mình là người sai. Điều anh mong muốn chỉ là em có thể chia sẻ với anh nhiều hơn một chút, nói cho anh biết em đang nghĩ gì, đang buồn chuyện gì, để anh có cơ hội hiểu em hơn, để anh biết mình nên làm gì và thay đổi như thế nào để cả hai có thể cùng nhau tốt hơn.</p>
+
+          <p>Nhưng hình như cách anh làm và cách anh nói đã làm em hiểu sai mình rồi.</p>
+
+          <span class="divider">• • •</span>
+
+          <p>Với cả, anh không biết biện minh như thế nào với những gì anh đã làm khi hai đứa ở bên nhau, và để em hiểu là anh không hề muốn hơn thua với em một lần nào cả. Thực sự trong thâm tâm anh không hề muốn nó xảy ra, vì <span class="highlight">thắng người mình thương là chưa thương người mình thắng</span> mà.</p>
+
+          <p>Nhưng những gì em thấy lại ngược lại với những gì anh thực sự muốn 😭😭😭 Xu cà na thật!!!!</p>
+
+          <span class="divider">• • •</span>
+
+          <p>Những gì anh viết ở đây không phải để thanh minh cho bản thân, cũng chẳng phải để mong em phải hiểu cho anh hay thay đổi suy nghĩ về những chuyện đã qua rồi. Anh chỉ muốn một lần nói hết những điều còn ở trong lòng mình, những điều mà có lẽ khi chúng ta còn bên nhau, anh đã không biết cách nói ra sao cho em hiểu.</p>
+
+          <p>Anh biết lời xin lỗi không thể làm những chuyện đã xảy ra trở nên chưa từng tồn tại 😔😔😔, và việc anh nhận ra mình sai cũng chẳng thể xóa đi những tổn thương em đã phải chịu. Nó vẫn ở đó, như em nói á — <span class="highlight">người bị đau mới là người nhớ</span>.</p>
+
+          <p>Nhưng ít nhất, anh muốn em biết anh đã thật sự suy nghĩ về tất cả những gì anh đã làm, đã nhìn lại bản thân mình và hiểu được rằng tình yêu không phải chỉ cần thương em thật nhiều là đủ, mà còn phải biết cách để em ấy cảm thấy được yêu thương.</p>
+
+          <span class="divider">• • •</span>
+
+          <p>Những gì anh chia sẻ ở đây không phải để thanh minh cho bản thân anh, mà chỉ để nói ra những gì trong lòng anh nghĩ thôi.</p>
+
+          <p>Giờ thì anh biết là mình đã sai như thế nào rồi. Anh vẫn ở đây, có thể sẽ rất lâu, cho tới khi anh cất giấu được đoạn tình cảm này.</p>
+
+          <p>Nên nếu có gì cần anh giúp thì cứ nhắn nhé, không sao đâu. Những lần anh nói "đừng nhắn nữa" chỉ là tự bảo vệ bản thân mình thôi. Anh sợ là nếu tiếp tục nhắn với tính cách của anh, có thể sẽ làm em đau thêm một lần nữa, nên thôi vậy!</p>
+
+          <p>Anh nói vậy thôi chứ nếu em có cơ hội tìm được người mình muốn ở cạnh thì cứ tiến tới nhé, không cần để ý đến toai đâu. <span class="highlight">Anh ổn mà!</span></p>
+
+          <span class="signature">— Anh 💌</span>
         </div>
-        
+
         <div class="btn-row">
           <button class="close-btn back-btn" id="backBtn">
             <span>↺</span> Quay lại
